@@ -1,6 +1,8 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AgentResol {
 	private Sudoku sudoku;
@@ -15,10 +17,9 @@ public class AgentResol {
 	}
 
 	public Matrix resolveMatrix(Matrix M,Integer IntervalColumn, Integer IntervaLine) {
+		Map<String,ArrayList<Integer>> FirstLine = this.resolveLine(M,M.getLine(0), IntervalColumn, IntervaLine);
+		System.out.println(FirstLine.toString());
 		
-		M.SetLine(0, this.resolveLine(M, M.getLine(0), IntervalColumn, IntervaLine));
-		M.SetLine(1, this.resolveLine(M, M.getLine(1), IntervalColumn, IntervaLine));
-		M.SetLine(2, this.resolveLine(M, M.getLine(2), IntervalColumn, IntervaLine));
 		return M;
 
 	}
@@ -41,8 +42,11 @@ public class AgentResol {
 	}
 		
 
-	public ArrayList<Integer> resolveLine(Matrix m, ArrayList<Integer> Linha, Integer IntervalColumn, Integer IntervaLine) {
-		ArrayList<Integer> aux = new ArrayList<>();
+	public Map<String,ArrayList<Integer>> resolveLine(Matrix m, ArrayList<Integer> Linha, Integer IntervalColumn, Integer IntervaLine) {
+		ArrayList<Integer> aux2 = new ArrayList<>() ;
+		
+		// LineColumn and Value
+		Map<String,ArrayList<Integer>> MapaSolutions = new HashMap<String, ArrayList<Integer>>();
 
 		//for each number of the line:
 		for (int column = 0; column < Linha.size() ; column++) {
@@ -50,18 +54,28 @@ public class AgentResol {
 			if(Linha.get(column) == 0) {
 				//try numbers 0 to 9
 				for (int i = 1; i < 10; i++) {
-					if (!m.containsValue(i) && !sudoku.checkInColumn(IntervalColumn, i, IntervaLine) && !sudoku.checkInLine(m.IndexOfLine(Linha), i, IntervaLine)) {
+					if (!m.containsValue(i) && !sudoku.checkInColumn(column, i, IntervalColumn) && !sudoku.checkInLine(m.IndexOfLine(Linha), i, IntervaLine)) {
 						System.out.println("i need to resolve Line " +m.IndexOfLine(Linha)+" Column " + column + " the answer could be:"+ i);
 						
-					}
-					
+						String key = String.valueOf(m.IndexOfLine(Linha)) +  String.valueOf(column);
+						
+						if(MapaSolutions.containsKey(key)) {
+							MapaSolutions.get(key).add(i);
+						}else {
+							ArrayList<Integer> aux3 = new ArrayList<>();
+							aux3.add(i);
+							MapaSolutions.put(key,aux3);
+						}
+						
+					}					
 				}
 				
-			}					
+			}
 			
-		}
-		
-		return Linha;
+			
+			
+		}		
+		return MapaSolutions;
 	}
 
 	public Sudoku getSudoku() {
