@@ -84,19 +84,18 @@ public class Sudoku {
 		Integer[] Interval = { intervalLine - 2, intervalLine };
 
 		ArrayList<Matrix> intervals = new ArrayList<>();
-
-		for (int i = Interval[0]; i < Interval[1]; i++) {
-			intervals.add(this.sudoku.get(i));
-		}
-
-		// check in first matrix
+	
+		intervals.add(sudoku.get(intervalLine-2));
+		intervals.add(sudoku.get(intervalLine-1));
+		intervals.add(sudoku.get(intervalLine));
+		
 		for (int i = 0; i < intervals.size(); i++) {
-
-			if (intervals.get(i).ValueInLine(Value, Line)) {
+			Matrix matrizatual =  intervals.get(i);
+			if(matrizatual.getLine(Line).contains(Value)) {
 				return true;
-			}
-
-		}
+			}			
+		}		
+		
 		return false;
 	}
 

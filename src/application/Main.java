@@ -13,7 +13,7 @@ public class Main {
 		System.out.println("SUDOKU GENERATED:");
 		System.out.println(sudoku.toString());
 		
-		System.out.println("SUDOKU SOLUTION:");		
+		System.out.println("SUDOKU SOLUTION:");	
 		AgentResol AgentII = new AgentResol(sudoku);
 		AgentII.resolversudoku();
 		System.out.println(AgentII.getSudoku());

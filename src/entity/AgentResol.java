@@ -42,30 +42,23 @@ public class AgentResol {
 		
 
 	public ArrayList<Integer> resolveLine(Matrix m, ArrayList<Integer> Linha, Integer IntervalColumn, Integer IntervaLine) {
-		ArrayList<Integer> aux = Linha;
-		
+		ArrayList<Integer> aux = new ArrayList<>();
 
-		for (int column = 0; column < Linha.size(); column++) {
-			Integer Valor = Linha.get(column);
+		//for each number of the line:
+		for (int column = 0; column < Linha.size() ; column++) {
 			
-			if(Valor == 0) {
-				
-				for (int resposta = 1; resposta < 10; resposta++) {
-					
-					tentativas++;					
-					
-					if(!m.containsValue(resposta)) {
+			if(Linha.get(column) == 0) {
+				//try numbers 0 to 9
+				for (int i = 1; i < 10; i++) {
+					if (!m.containsValue(i) && !sudoku.checkInColumn(IntervalColumn, i, IntervaLine) && !sudoku.checkInLine(m.IndexOfLine(Linha), i, IntervaLine)) {
+						System.out.println("i need to resolve Line " +m.IndexOfLine(Linha)+" Column " + column + " the answer could be:"+ i);
 						
-						System.out.println("a resposta é: "+resposta);
-						System.out.println("vou por na Linha de coluna " + column);
-						Linha.set(column, resposta);
-						m.SetLine(m.IndexOfLine(aux), Linha);
-						break;
 					}
 					
 				}
 				
-			};
+			}					
+			
 		}
 		
 		return Linha;
