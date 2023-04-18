@@ -47,8 +47,6 @@ public class Sudoku {
 	public void randomMatrix(Matrix auxM, Integer intervalLine, Integer intervalColumn) {
 		Random random = new Random();
 
-		ArrayList<Integer> Line = new ArrayList<>();
-
 		// three values random to be insert in the matrix
 		int value1 = 0;
 		int value2 = 0;
@@ -57,34 +55,33 @@ public class Sudoku {
 		int column1 = random.nextInt(0, 3);
 		int column2 = random.nextInt(0, 3);
 		int column3 = random.nextInt(0, 3);
-		Integer[] interval = { intervalLine - 2, intervalLine };
-
 		do {
 
 			value1 = random.nextInt(1, 9);
 
 		} while (auxM.containsValue(value1) || checkInColumn(column1, value1, intervalColumn)
-				|| checkInLine(0, value1, interval));
+				|| checkInLine(0, value1, intervalLine));
 		auxM.getLine(0).set(column1, value1);
 
 		do {
 			value2 = random.nextInt(1, 9);
 
 		} while (auxM.containsValue(value2) || checkInColumn(column2, value2, intervalColumn)
-				|| checkInLine(1, value2, interval));
+				|| checkInLine(1, value2, intervalLine));
 
 		auxM.getLine(1).set(column2, value2);
 
 		do {
 			value3 = random.nextInt(1, 9);
 		} while (auxM.containsValue(value3) || checkInColumn(column2, value3, intervalColumn)
-				|| checkInLine(2, value3, interval));
+				|| checkInLine(2, value3, intervalLine));
 		auxM.getLine(2).set(column3, value3);
 		// witch column insert
 
 	}
 
-	public boolean checkInLine(Integer Line, Integer Value, Integer[] Interval) {
+	public boolean checkInLine(Integer Line, Integer Value, Integer intervalLine) {
+		Integer[] Interval = { intervalLine - 2, intervalLine };
 
 		ArrayList<Matrix> intervals = new ArrayList<>();
 
@@ -142,5 +139,15 @@ public class Sudoku {
 		return str;
 
 	}
+
+	public ArrayList<Matrix> getSudoku() {
+		return sudoku;
+	}
+
+	public void setSudoku(ArrayList<Matrix> sudoku) {
+		this.sudoku = sudoku;
+	}
+	
+	
 
 }

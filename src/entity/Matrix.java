@@ -89,6 +89,13 @@ public class Matrix {
 		return false;	
 	}
 	
+	public Integer IndexOfLine(ArrayList<Integer> line) {
+		return matrixlist.indexOf(line);
+		
+	}
 	
+	public void SetLine(Integer Index, ArrayList<Integer> line) {
+		this.matrixlist.set(0, line);
+	}
 
 }
