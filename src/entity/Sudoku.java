@@ -17,15 +17,15 @@ public class Sudoku {
 	}
 
 	public void create() {
-
+		
 		this.randomMatrix(this.sudoku.get(0), 2, 0);
 		this.randomMatrix(this.sudoku.get(1), 2, 1);
 		this.randomMatrix(this.sudoku.get(2), 2, 2);
-
+		
 		this.randomMatrix(this.sudoku.get(3), 5, 0);
 		this.randomMatrix(this.sudoku.get(4), 5, 1);
 		this.randomMatrix(this.sudoku.get(5), 5, 2);
-
+		
 		this.randomMatrix(this.sudoku.get(6), 8, 0);
 		this.randomMatrix(this.sudoku.get(7), 8, 1);
 		this.randomMatrix(this.sudoku.get(8), 8, 2);
@@ -55,34 +55,32 @@ public class Sudoku {
 		int column1 = random.nextInt(0, 3);
 		int column2 = random.nextInt(0, 3);
 		int column3 = random.nextInt(0, 3);
+		
+		
 		do {
-
 			value1 = random.nextInt(1, 9);
 
-		} while (auxM.containsValue(value1) || checkInColumn(column1, value1, intervalColumn)
-				|| checkInLine(0, value1, intervalLine));
+		} while (auxM.containsValue(value1) || this.checkInColumn(column1, value1, intervalColumn) || this.checkInLine(0, value1, intervalLine) );
+		
+		
 		auxM.getLine(0).set(column1, value1);
 
 		do {
 			value2 = random.nextInt(1, 9);
 
-		} while (auxM.containsValue(value2) || checkInColumn(column2, value2, intervalColumn)
-				|| checkInLine(1, value2, intervalLine));
+		} while (auxM.containsValue(value2) || this.checkInColumn(column2, value2, intervalColumn) || this.checkInLine(1, value2, intervalLine));
 
 		auxM.getLine(1).set(column2, value2);
 
 		do {
 			value3 = random.nextInt(1, 9);
-		} while (auxM.containsValue(value3) || checkInColumn(column2, value3, intervalColumn)
-				|| checkInLine(2, value3, intervalLine));
+		} while (auxM.containsValue(value3) || this.checkInColumn(column3, value3, intervalColumn) || this.checkInLine(2, value3, intervalLine));
 		auxM.getLine(2).set(column3, value3);
-		// witch column insert
+		
 
 	}
 
 	public boolean checkInLine(Integer Line, Integer Value, Integer intervalLine) {
-		Integer[] Interval = { intervalLine - 2, intervalLine };
-
 		ArrayList<Matrix> intervals = new ArrayList<>();
 	
 		intervals.add(sudoku.get(intervalLine-2));

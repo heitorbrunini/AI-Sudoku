@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class AgentResol {
 	private Sudoku sudoku;
@@ -17,14 +18,25 @@ public class AgentResol {
 	}
 
 	public Matrix resolveMatrix(Matrix M,Integer IntervalColumn, Integer IntervaLine) {
-		
+		Random random = new Random();
 		Map<String,ArrayList<Integer>> FirstLineSolutions = this.resolveLine(M,M.getLine(0), IntervalColumn, IntervaLine);
 		Map<String,ArrayList<Integer>> SecondLineSolutions = this.resolveLine(M,M.getLine(1), IntervalColumn, IntervaLine);
 		Map<String,ArrayList<Integer>> ThirdineSolutions = this.resolveLine(M,M.getLine(2), IntervalColumn, IntervaLine);
 		
+		ArrayList<Integer> valuesToLine = new ArrayList<>();
+		for (int column = 0; column < 3; column++) {
+									
+			if (FirstLineSolutions.containsKey("0"+ String.valueOf(column))) {
+				valuesToLine = FirstLineSolutions.get("0"+ String.valueOf(column));
+				int SortIndex = random.nextInt(0,valuesToLine.size()-1);
+				System.out.println("the choosen value to 0" + String.valueOf(column)+ " is  "+ valuesToLine.get(SortIndex) );
+			}			
+						
+		}
+				
 		System.out.println(FirstLineSolutions.toString());
-		System.out.println(SecondLineSolutions.toString());
-		System.out.println(ThirdineSolutions.toString());
+		
+		
 		
 		
 		return M;
