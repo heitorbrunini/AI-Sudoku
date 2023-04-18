@@ -17,8 +17,15 @@ public class AgentResol {
 	}
 
 	public Matrix resolveMatrix(Matrix M,Integer IntervalColumn, Integer IntervaLine) {
-		Map<String,ArrayList<Integer>> FirstLine = this.resolveLine(M,M.getLine(0), IntervalColumn, IntervaLine);
-		System.out.println(FirstLine.toString());
+		
+		Map<String,ArrayList<Integer>> FirstLineSolutions = this.resolveLine(M,M.getLine(0), IntervalColumn, IntervaLine);
+		Map<String,ArrayList<Integer>> SecondLineSolutions = this.resolveLine(M,M.getLine(1), IntervalColumn, IntervaLine);
+		Map<String,ArrayList<Integer>> ThirdineSolutions = this.resolveLine(M,M.getLine(2), IntervalColumn, IntervaLine);
+		
+		System.out.println(FirstLineSolutions.toString());
+		System.out.println(SecondLineSolutions.toString());
+		System.out.println(ThirdineSolutions.toString());
+		
 		
 		return M;
 
@@ -54,9 +61,7 @@ public class AgentResol {
 			if(Linha.get(column) == 0) {
 				//try numbers 0 to 9
 				for (int i = 1; i < 10; i++) {
-					if (!m.containsValue(i) && !sudoku.checkInColumn(column, i, IntervalColumn) && !sudoku.checkInLine(m.IndexOfLine(Linha), i, IntervaLine)) {
-						System.out.println("i need to resolve Line " +m.IndexOfLine(Linha)+" Column " + column + " the answer could be:"+ i);
-						
+					if (!m.containsValue(i) && !sudoku.checkInColumn(column, i, IntervalColumn) && !sudoku.checkInLine(m.IndexOfLine(Linha), i, IntervaLine)) {						
 						String key = String.valueOf(m.IndexOfLine(Linha)) +  String.valueOf(column);
 						
 						if(MapaSolutions.containsKey(key)) {
@@ -71,9 +76,7 @@ public class AgentResol {
 				}
 				
 			}
-			
-			
-			
+						
 		}		
 		return MapaSolutions;
 	}
@@ -93,7 +96,4 @@ public class AgentResol {
 	public void setTentativas(Integer tentativas) {
 		this.tentativas = tentativas;
 	}
-	
-	
-
 }
