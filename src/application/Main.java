@@ -10,6 +10,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		/*
+		
 		ArrayList<Integer> Line = new ArrayList<>();
 		ArrayList<Integer> Line2 = new ArrayList<>();
 		ArrayList<Integer> Line3 = new ArrayList<>();		
@@ -100,9 +102,12 @@ public class Main {
 		Line12.add( 0);
 		Line12.add( 0);
 		
-		Sudoku sudoku = new Sudoku(matrix1,matrix2, matrix3);
-		System.out.println(sudoku.toString());		
 		
-	}
-
+		*/
+		Sudoku sudoku = new Sudoku(true);
+		System.out.println(sudoku.toString());
+		sudoku.create();
+		System.out.println("SUDOKU GENERATED:");
+		System.out.println(sudoku.toString());
+		}
 }

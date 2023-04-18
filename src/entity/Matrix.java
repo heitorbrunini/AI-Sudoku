@@ -19,6 +19,28 @@ public class Matrix {
 	public Matrix(ArrayList<ArrayList<Integer>> matrixlist) {
 		this.matrixlist = matrixlist;
 	}
+	
+	public Matrix(Boolean True) {
+		ArrayList<Integer> Line = new ArrayList<>();
+		ArrayList<Integer> Line2 = new ArrayList<>();
+		ArrayList<Integer> Line3 = new ArrayList<>();
+
+		Line.add(0);
+		Line.add(0);
+		Line.add(0);
+		
+		Line2.add(0);
+		Line2.add(0);
+		Line2.add(0);
+		
+		Line3.add(0);
+		Line3.add(0);
+		Line3.add(0);
+		
+		this.addline(Line);
+		this.addline(Line2);
+		this.addline(Line3);
+	}
 
 	public void addline(ArrayList<Integer> values) {
 		if (matrixlist.size() < 3) {
@@ -51,13 +73,22 @@ public class Matrix {
 		return false;
 	}
 	
-	@Override
-	public String toString() {
-		String thematrix = "";
-		thematrix = thematrix + matrixlist.get(0);
-		thematrix = thematrix + "\n" + matrixlist.get(1);
-		thematrix = thematrix + "\n" + matrixlist.get(2);
-		return thematrix;
+	public Boolean ValueInLine(Integer Value, Integer Line) {
+		return this.matrixlist.get(Line).contains(Value);
 	}
+	
+	public Boolean ValueInColumn(Integer value, Integer Column) {
+		
+		for (int i = 0; i < 3; i++) {
+			
+			if(this.matrixlist.get(i).get(Column) == value) {
+				return true;
+			}
+			
+		}		
+		return false;	
+	}
+	
+	
 
 }
