@@ -15,6 +15,12 @@ public class Sudoku {
 			sudoku.add(new Matrix(true));
 		}
 	}
+	
+	
+
+	public Sudoku(ArrayList<Matrix> sudoku) {
+		this.sudoku = sudoku;
+	}
 
 	public void create() {
 		
@@ -156,5 +162,4 @@ public class Sudoku {
 		this.sudoku = sudoku;
 	}
 	
-
 }

@@ -10,14 +10,11 @@ public class Main {
 
 		Sudoku sudoku = new Sudoku(true);
 		sudoku.create();
-		System.out.println("SUDOKU GENERATED:");
+		System.out.println("(●'◡'●) - Sudoku kun: SUDOKU GENERATED");
 		System.out.println(sudoku.toString());
 		
-		System.out.println("SUDOKU SOLUTION:");	
+		System.out.println("(⌐■_■) - Skynet: SUDOKU SOLUTION:");	
 		AgentResol AgentII = new AgentResol(sudoku);
 		AgentII.start();
-		System.out.println(AgentII.getSudoku());
-		
-
 	}
 }

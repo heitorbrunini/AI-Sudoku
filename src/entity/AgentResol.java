@@ -5,28 +5,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import entity.backupClasses.CareTaker;
+import entity.backupClasses.Memento;
+
 public class AgentResol {
 	private Sudoku sudoku;
-	private static final Sudoku reset = new Sudoku();
+	private Memento m;
+	private CareTaker c = new CareTaker();
 	private Integer tentativas = 0;
 
 	AgentResol() {
 	}
 
 	public AgentResol(Sudoku sudoku) {
+		
 		this.sudoku = sudoku;
-		reset.setSudoku(sudoku.getSudoku());
 	}
 	
 	public void start() {
-		
-		while(!this.sudoku.checkComplete()) {
-			sudoku = reset;
-			System.out.println("reset:---------\n" +reset);
+		resolversudoku();
+		System.out.println(sudoku);	
+		/*while(!this.sudoku.checkComplete()) {
+			
+			System.out.println("reset:---------\n");
 			this.resolversudoku();
 			tentativas++;
 			System.out.println(sudoku);
-		}
+		}*/
 		
 	}
 
@@ -79,12 +84,10 @@ public class AgentResol {
 						
 					} 
 					
-				}
-				
+				}				
 				else {
 					
-				}
-				
+				}				
 			}
 						
 		}
@@ -141,7 +144,7 @@ public class AgentResol {
 		}		
 		return MapaSolutions;
 	}
-
+	
 	public Sudoku getSudoku() {
 		return sudoku;
 	}

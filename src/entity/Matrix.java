@@ -97,5 +97,4 @@ public class Matrix {
 	public void SetLine(Integer Index, ArrayList<Integer> line) {
 		this.matrixlist.set(0, line);
 	}
-
 }
