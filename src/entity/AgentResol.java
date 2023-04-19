@@ -7,14 +7,27 @@ import java.util.Random;
 
 public class AgentResol {
 	private Sudoku sudoku;
-	private Integer tentativas=0;
+	private static final Sudoku reset = new Sudoku();
+	private Integer tentativas = 0;
 
 	AgentResol() {
-
 	}
 
 	public AgentResol(Sudoku sudoku) {
 		this.sudoku = sudoku;
+		reset.setSudoku(sudoku.getSudoku());
+	}
+	
+	public void start() {
+		
+		while(!this.sudoku.checkComplete()) {
+			sudoku = reset;
+			System.out.println("reset:---------\n" +reset);
+			this.resolversudoku();
+			tentativas++;
+			System.out.println(sudoku);
+		}
+		
 	}
 
 	public Matrix resolveMatrix(Matrix M,Integer IntervalColumn, Integer IntervaLine) {
