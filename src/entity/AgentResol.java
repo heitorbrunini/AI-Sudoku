@@ -20,31 +20,72 @@ public class AgentResol {
 	public Matrix resolveMatrix(Matrix M,Integer IntervalColumn, Integer IntervaLine) {
 		Random random = new Random();
 		Map<String,ArrayList<Integer>> FirstLineSolutions = this.resolveLine(M,M.getLine(0), IntervalColumn, IntervaLine);
-		Map<String,ArrayList<Integer>> SecondLineSolutions = this.resolveLine(M,M.getLine(1), IntervalColumn, IntervaLine);
-		Map<String,ArrayList<Integer>> ThirdineSolutions = this.resolveLine(M,M.getLine(2), IntervalColumn, IntervaLine);
 		
 		ArrayList<Integer> valuesToLine = new ArrayList<>();
-		ArrayList<Integer> valuesUsed = new ArrayList<>();
-		int SortIndex = random.nextInt(0,valuesToLine.size()-1);
 		
-		
-		for (int column = 0; column < 3; column++) {
-			
+		for (int column = 0; column < 3; column++) {			
 			//checks if the column exists in map
 			if (FirstLineSolutions.containsKey("0"+ String.valueOf(column))) {
 				
-				//sort a number from possible solurions from the map
+				//Get the possible numbers to that camp
 				valuesToLine = FirstLineSolutions.get("0"+ String.valueOf(column));
-				SortIndex = random.nextInt(0,valuesToLine.size()-1);
-				valuesUsed.add(valuesToLine.get(SortIndex) );
-				M.getLine(0).set(column, valuesToLine.get(SortIndex) );
-			}
+
+				System.out.println(valuesToLine.size());
+				//check if there possibles numbers to that camp
+				if (valuesToLine.size()>1) {
+					
+					while(true) {
+						int SortIndex = random.nextInt(0,valuesToLine.size()-1);
 						
-						
-		}
+						if (!M.containsValue(valuesToLine.get(SortIndex))) {
+							M.getLine(0).set(column, valuesToLine.get(SortIndex) );
+							break;
+						}
+					}
+					
+				}else if (valuesToLine.size() ==1) {
+					M.getLine(0).set(column, valuesToLine.get(0));
+				} 
 				
-		System.out.println(FirstLineSolutions.toString());		
+			}						
+		}
+		System.out.println(FirstLineSolutions.toString());
+				
+		Map<String,ArrayList<Integer>> SecondLineSolutions = this.resolveLine(M,M.getLine(1), IntervalColumn, IntervaLine);
+		
+		for (int column = 0; column < 3; column++) {			
+			//checks if the column exists in map
+			if (SecondLineSolutions.containsKey("1"+ String.valueOf(column))) {
+				
+				//Get the possible numbers to that camp
+				valuesToLine = SecondLineSolutions.get("1"+ String.valueOf(column));
+
+				System.out.println(valuesToLine.size());
+				//check if there possibles numbers to that camp
+				if (valuesToLine.size()>1) {
+					
+					while(true) {
+						int SortIndex = random.nextInt(0,valuesToLine.size()-1);
+						
+						if (!M.containsValue(valuesToLine.get(SortIndex))) {
+							M.getLine(1).set(column, valuesToLine.get(SortIndex) );
+							break;
+						}
+					}
+					
+				}else if (valuesToLine.size() ==1) {
+					M.getLine(1).set(column, valuesToLine.get(0));
+				} 
+				
+			}						
+		}
+		Map<String,ArrayList<Integer>> ThirdineSolutions = this.resolveLine(M,M.getLine(2), IntervalColumn, IntervaLine);
+	
+		
+		System.out.println(SecondLineSolutions);
+		
 		return M;
+
 	}
 	
 	public void resolversudoku() {
