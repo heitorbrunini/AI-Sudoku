@@ -113,6 +113,17 @@ public class Sudoku {
 		}
 		return false;
 	}
+	
+	public boolean checkComplete() {
+		
+		for (int matriz = 0; matriz < sudoku.size(); matriz++) {
+			if(sudoku.get(matriz).containsValue(0)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
 	public String toString() {
 
