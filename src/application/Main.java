@@ -16,6 +16,7 @@ public class Main {
 		System.out.println("SUDOKU SOLUTION:");	
 		AgentResol AgentII = new AgentResol(sudoku);
 		AgentII.resolversudoku();
+		System.out.println(AgentII.getSudoku());
 		
 
 	}

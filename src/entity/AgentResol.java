@@ -24,23 +24,27 @@ public class AgentResol {
 		Map<String,ArrayList<Integer>> ThirdineSolutions = this.resolveLine(M,M.getLine(2), IntervalColumn, IntervaLine);
 		
 		ArrayList<Integer> valuesToLine = new ArrayList<>();
+		ArrayList<Integer> valuesUsed = new ArrayList<>();
+		int SortIndex = random.nextInt(0,valuesToLine.size()-1);
+		
+		
 		for (int column = 0; column < 3; column++) {
-									
+			
+			//checks if the column exists in map
 			if (FirstLineSolutions.containsKey("0"+ String.valueOf(column))) {
+				
+				//sort a number from possible solurions from the map
 				valuesToLine = FirstLineSolutions.get("0"+ String.valueOf(column));
-				int SortIndex = random.nextInt(0,valuesToLine.size()-1);
-				System.out.println("the choosen value to 0" + String.valueOf(column)+ " is  "+ valuesToLine.get(SortIndex) );
-			}			
+				SortIndex = random.nextInt(0,valuesToLine.size()-1);
+				valuesUsed.add(valuesToLine.get(SortIndex) );
+				M.getLine(0).set(column, valuesToLine.get(SortIndex) );
+			}
+						
 						
 		}
 				
-		System.out.println(FirstLineSolutions.toString());
-		
-		
-		
-		
+		System.out.println(FirstLineSolutions.toString());		
 		return M;
-
 	}
 	
 	public void resolversudoku() {
