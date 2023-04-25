@@ -12,6 +12,7 @@ public class CareTaker {
 	
 	public void addState(Memento m) {
 		states.add(m);
+		
 	}
 	
 }

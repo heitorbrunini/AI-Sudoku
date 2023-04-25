@@ -10,11 +10,10 @@ import entity.backupClasses.Memento;
 
 public class AgentResol {
 	private Sudoku sudoku;
-	private Memento m;
-	private CareTaker c = new CareTaker();
 	private Integer tentativas = 0;
 
 	AgentResol() {
+		
 	}
 
 	public AgentResol(Sudoku sudoku) {
@@ -23,21 +22,11 @@ public class AgentResol {
 	}
 	
 	public void start() {
-		resolversudoku();
-		System.out.println(sudoku);	
-		/*while(!this.sudoku.checkComplete()) {
-			
-			System.out.println("reset:---------\n");
-			this.resolversudoku();
-			tentativas++;
-			System.out.println(sudoku);
-		}*/
-		
+		resolversudoku();		
 	}
 
 	public Matrix resolveMatrix(Matrix M,Integer IntervalColumn, Integer IntervaLine) {
 		Random random = new Random();
-		Map<String,ArrayList<Integer>> FirstLineSolutions = this.resolveLine(M,M.getLine(0), IntervalColumn, IntervaLine);
 		
 		ArrayList<Integer> valuesToLine = new ArrayList<>();
 		
@@ -113,9 +102,7 @@ public class AgentResol {
 	}
 		
 
-	public Map<String,ArrayList<Integer>> resolveLine(Matrix m, ArrayList<Integer> Linha, Integer IntervalColumn, Integer IntervaLine) {
-		ArrayList<Integer> aux2 = new ArrayList<>() ;
-		
+	public Map<String,ArrayList<Integer>> resolveLine(Matrix m, ArrayList<Integer> Linha, Integer IntervalColumn, Integer IntervaLine) {		
 		// LineColumn and Value
 		Map<String,ArrayList<Integer>> MapaSolutions = new HashMap<String, ArrayList<Integer>>();
 
@@ -141,8 +128,25 @@ public class AgentResol {
 				
 			}
 						
-		}		
+		}
 		return MapaSolutions;
+	}
+	
+	public void restart(Memento m) {
+		this.sudoku = m.getSudoku();
+		tentativas++;
+	}
+	
+	public Memento backup() {
+		return new Memento(this.sudoku);
+	}
+	
+	public Boolean done() {
+		if(this.sudoku.checkComplete()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public Sudoku getSudoku() {

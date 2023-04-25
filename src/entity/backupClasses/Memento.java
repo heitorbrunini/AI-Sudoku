@@ -11,5 +11,6 @@ public class Memento {
 	
 	public Sudoku getSudoku() {
 		return this.sudoku;
+		
 	}
 }
